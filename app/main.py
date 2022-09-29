@@ -1,6 +1,4 @@
 from flask import Response,request,Flask
-import time
-from Bot import Bot
 from Bots import MohammedSabryBot
 
 # helping website https://www.pragnakalp.com/create-telegram-bot-using-python-tutorial-with-examples/
@@ -22,5 +20,3 @@ def mohamed_sabry():
     else:
         return "<h1>Welcome to mohamedsabry</h1>"
  
-if __name__ == '__main__':
-   app.run(threaded=True)
