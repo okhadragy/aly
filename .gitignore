@@ -1,5 +1,7 @@
 dist/
 build/
 .eggs/
-__pycashe__/
+__pycache__/
 pybot.egg-info/
+pybot/__pycache__/
+.gitignore
