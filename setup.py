@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 setup(
-    name='pybot',
+    name='socialpybot',
     packages=find_packages(include=["pybot","pybot.management","pybot.management.structure"]),
     version='0.0.1',
     description='Python library helps you to create Telegram bots more easily',
