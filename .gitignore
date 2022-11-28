@@ -1,0 +1,5 @@
+dist/
+build/
+.eggs/
+__pycashe__/
+pybot.egg-info/
