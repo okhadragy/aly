@@ -1,2 +1,2 @@
-# socialpybot
-with this library create your telegram bots in an easy way
+# Aly
+A powerful library to create telegram bots
