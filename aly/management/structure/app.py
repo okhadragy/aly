@@ -1,6 +1,6 @@
 from settings import *
 from flask import Response, request, Flask
-from pybot.bot import *
+from aly.bot import *
 
 # helping website https://www.pragnakalp.com/create-telegram-bot-using-python-tutorial-with-examples/
 # telegram api https://core.telegram.org/bots/api

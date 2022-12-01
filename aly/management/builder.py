@@ -1,5 +1,5 @@
-import os,re
-from pybot.bot import Bot
+import os,re,keyword
+from aly.bot import TeleBot
 
 class Builder:
 
@@ -19,20 +19,17 @@ class Builder:
             settings_structure += f.read()
 
         
-        if path.split("\\")[-1] == project_name:
-
-            exists = os.path.exists(f"{path}\\settings.py")
-            if not exists:
-                with open(f"{path}\\settings.py","w") as file:
-                    file.write(settings_structure)
-                settings_file = settings_structure
-            else:
-                with open(f"{path}\\settings.py") as file:
-                    settings_file += file.read()
+        exists = os.path.exists(f"{path}\\settings.py")
+        if not exists:
+            with open(f"{path}\\settings.py","w") as file:
+                file.write(settings_structure)
+            settings_file = settings_structure
         else:
-            print("\x1b[1;31m\nError: Make sure you are in the project directory\x1b[1;37m")
+            with open(f"{path}\\settings.py") as file:
+                settings_file += file.read()
+        
                 
-        return settings_file,settings_structure
+        return (settings_file,settings_structure)
 
     @classmethod
     def create_app(cls,project_name,path=f"{os.getcwd()}\\"):
@@ -46,22 +43,18 @@ class Builder:
         with open(f"{os.path.dirname(os.path.realpath(__file__))}\\structure\\app.py") as f:
             app_stucture += f.read()
         
+        exists = os.path.exists(f"{path}\\app.py")
 
-        if path.split("\\")[-1] == project_name:
-            exists = os.path.exists(f"{path}\\app.py")
-
-            if not exists:        
-                with open(f"{path}\\app.py","w") as file:
-                    file.write(app_stucture)
-                app_file = app_stucture
-            else:
-                with open(f"{path}\\app.py") as file:
-                    app_file += file.read()
+        if not exists:        
+            with open(f"{path}\\app.py","w") as file:
+                file.write(app_stucture)
+            app_file = app_stucture
         else:
-            print("\x1b[1;31m\nError: Make sure you are in the project directory\x1b[1;37m")
-
+            with open(f"{path}\\app.py") as file:
+                app_file += file.read()
+        
             
-        return app_file,app_stucture
+        return (app_file,app_stucture)
  
     @classmethod
     def create_manage(cls,project_name, path=f"{os.getcwd()}\\"):
@@ -89,21 +82,27 @@ class Builder:
  
     @classmethod
     def build_project(cls,name):
-        try:
-            os.mkdir(f'{os.curdir}/{name}')
+        if not keyword.iskeyword(name):
+            if name.isidentifier():
+                try:
+                    os.mkdir(f'{os.curdir}/{name}')
 
-            # Create SETTINGS file
-            settings_file,settings_structure = cls.create_settings(name)
+                    # Create SETTINGS file
+                    settings_file,settings_structure = cls.create_settings(name)
 
-            # Create MAIN file
-            app_file,app_stucture = cls.create_app(name)
+                    # Create MAIN file
+                    app_file,app_stucture = cls.create_app(name)
 
-            # Create manage.py
-            manage_structure = cls.create_manage(name)
+                    # Create manage.py
+                    manage_structure = cls.create_manage(name)
 
-            return cls(name)
-        except FileExistsError:
-            print("\x1b[1;31m\nError: There is a folder with the same name exists in this directory\x1b[1;37m")
+                    return cls(name)
+                except FileExistsError:
+                    print("\x1b[1;31m\nError: There is a folder with the same name exists in this directory\x1b[1;37m")
+            else:
+                print("\x1b[1;31m\nError: Invalid name does not match python variable naming conventions\x1b[1;37m")
+        else:
+            print("\x1b[1;31m\nError: Invalid name you can not use python keywords as a project name\x1b[1;37m")
 
     @classmethod
     def check_input(cls,input_msg,error_msg):
@@ -145,7 +144,7 @@ class Builder:
 
                     l = "BOTS = " + bots + comma
 
-                    l += f"'{bot_name}': Bot('{bot_name}',TOKENS['{bot_name}'])" + "}"
+                    l += f"'{bot_name}': TeleBot('{bot_name}',TOKENS['{bot_name}'])" + "}"
 
                 new_code += l+"\n"
                 
@@ -183,8 +182,15 @@ class Builder:
     
     # Validate name
     def validate(self,bot_name,BOTS):
+        # Check if there is a bot with same name
         for bot in BOTS.keys():
             while bot_name == bot:
-                print("\x1b[1;31m\nError: You can't use the same bot name again in the same project\x1b[1;37m")
+                print("\x1b[1;31m\nError: You can't use the same bot name again in the same project\x1b[1;37m\n")
                 bot_name = input("Bot name: ")
+        
+        # Check if name matches python variable naming conventions
+        while not bot_name.isidentifier():
+            print("\x1b[1;31m\nError: Invalid name does not match python variable naming conventions so try another one \x1b[1;37m\n")
+            bot_name = input("Bot name: ")
+
         return bot_name

@@ -1,6 +1,6 @@
 import os,sys
-from pybot.management.builder import *
-from pybot.management.paraser import *
+from aly.management.builder import *
+from aly.management.paraser import *
 
 
 

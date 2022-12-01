@@ -1,4 +1,4 @@
-from pybot.bot import *
+from aly.bot import *
 
 """ SETTINGS """
 

@@ -1,6 +1,6 @@
 dist/
 build/
 .eggs/
-socialpybot.egg-info/
+aly.egg-info/
 __pycache__/
 **/__pycache__/

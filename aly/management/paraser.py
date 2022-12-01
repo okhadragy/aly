@@ -5,7 +5,7 @@ import os
 class Paraser:
 
     def __init__(self):
-        self.parser = ArgumentParser(description = f"\x1b[1;34mdescription: pybot is a tool to build telegram bots in an easy way\x1b[1;37m\n")
+        self.parser = ArgumentParser(description = f"\x1b[1;34mdescription: aly is a tool to build telegram bots in an easy way\x1b[1;37m\n")
        
 
     def err(self,error):

@@ -1,5 +1,5 @@
-from pybot.management.builder import Builder
-from pybot.management.paraser import Paraser
+from aly.management.builder import Builder
+from aly.management.paraser import Paraser
 from settings import *
 import sys,os
 
