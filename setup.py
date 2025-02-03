@@ -13,5 +13,9 @@ setup(
         "console_scripts": [
             "aly = aly.cli:main",
         ]
+    },
+    url="https://github.com/okhadragy/aly",
+    project_urls={
+        "Source Code": "https://github.com/okhadragy/aly",
     }
 )
