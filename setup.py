@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 setup(
     name='aly',
     packages=find_packages(include=["aly","aly.management","aly.management.structure"]),
-    version='0.0.1',
+    version='0.0.2',
     description='Python library helps you to create Telegram bots more easily',
     author='Omar Elkhadragy',
     license='MIT',
